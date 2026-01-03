@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="relative bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        {% if search_query %}
+            <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+                Search Results for "<span class="text-blue-600">{{ search_query }}</span>"
+            </h1>
+            <a href="{{ url_for('doctors_page') }}" class="mt-4 inline-block text-blue-500 hover:underline">← View All Doctors</a>
+        {% else %}
+            <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl" data-aos="fade-down">
+                Meet Our <span class="text-blue-600">Specialists</span>
+            </h1>
+            <p class="mt-4 text-xl text-gray-500 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                World-class experts combining medical excellence with compassionate care and AI-driven diagnostics.
+            </p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {% if doctors|length == 0 %}
+            <div class="text-center py-20">
+                <p class="text-2xl text-gray-400">No doctors found matching your search.</p>
+                <p class="text-gray-500 mt-2">Try searching for a different name or specialty.</p>
+            </div>
+        {% else %}
+        
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                {% for doctor in doctors %}
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 group" data-aos="fade-up">
+                    
+                    <div class="h-64 bg-gray-200 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center text-6xl bg-gradient-to-b from-{{ doctor.color }}-100 to-{{ doctor.color }}-200">
+                            {{ doctor.image }}
+                        </div>
+                    </div>
+
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-gray-900">{{ doctor.name }}</h3>
+                        
+                        <p class="text-{{ doctor.color }}-600 font-medium mb-2">{{ doctor.specialty }}</p>
+                        
+                        <p class="text-gray-500 text-sm mb-6">{{ doctor.description }}</p>
+                        
+                        <a href="{{ url_for('book_appointment', doctor=doctor.name) }}" 
+                           class="block w-full bg-{{ doctor.color }}-600 text-white py-2 rounded-lg font-semibold hover:bg-{{ doctor.color }}-700 transition">
+                           Book Appointment
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                </div>
+            
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

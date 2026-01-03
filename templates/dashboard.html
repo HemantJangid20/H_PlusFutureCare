@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
+
+    <div class="text-center bg-gray-800 p-10 rounded-2xl shadow-xl border border-gray-700">
+        
+        <div class="relative w-24 h-24 mx-auto mb-4">
+            <img src="{{ picture }}" alt="Profile Pic" 
+                 class="w-full h-full rounded-full border-4 border-blue-500 shadow-lg object-cover">
+            <div class="absolute bottom-0 right-0 w-6 h-6 bg-green-500 rounded-full border-2 border-gray-800"></div>
+        </div>
+
+        <h1 class="text-3xl font-bold mb-2">Welcome, {{ name }}!</h1>
+        <p class="text-gray-400 mb-6">Logged in via Google</p>
+
+        <div class="space-x-4">
+            <button class="px-6 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition">My Profile</button>
+            <a href="{{ url_for('logout') }}" class="px-6 py-2 bg-red-600 rounded-lg hover:bg-red-700 transition">Logout</a>
+        </div>
+    </div>
+
+</body>
+</html>
