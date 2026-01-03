@@ -1,4 +1,5 @@
 flask
+flask-sqlalchemy
 gunicorn
 numpy
 opencv-python-headless
